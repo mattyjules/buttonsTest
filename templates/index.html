@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <script src="{{ url_for('static', filename='scoringForm.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <title>Neuraxial Entry</title>
+</head>
+<body>
+   <div class="container">
+      <div id="Scenario-Container">
+         <div id="Scenario-Text">
+            <h2>Scenario x/y</h2>
+            <h5>Indication for section, relevant clinical details and urgency:  </h5>
+            <span>Emergency LSCS for Pathological CTG and no improvement with conservative measures, BMI 43</span>
+            <h5>Other details</h5>
+            <span>Required more than 2 attempts, needle from 90mm to 156mm. 2nd pass with 156mm to clear CSF<br><br>Block T2 cold, T5 light touch, good effect</span>
+         </div>
+
+         <div id="Base-Assumption">
+            <h5>If no detail provided, assume:</h5>
+            <span>
+            Spinal<br>
+            All pre-procedure checks complete<br>
+            All anaesthetic consent selected (omitting 'see anaesthetic consent' and 'See Consent Form')<br>
+            Block Sitting<br>
+            0.5% chlorhex, allowed to dry, gown, glove, hat, drapes, gloves, hand hygiene, mask<br>
+            All monitoring<br>
+            Landmark<br>
+            Midline<br>
+            Below L2/3<br>
+            non-cutting needle - 25G, 90mm<br>
+            1st pass<br>
+            1% lidocaine to skin<br>
+            0.5% hyperbaric bupivacaine volume 2-3mls<br>
+            diamorphine 300mcg<br>
+            Block T2 cold, T5 light touch<br>
+            Procedure well tolerated under block
+            </span>
+         </div>
+
+         <div id="line1">
+            <hr>
+         </div>
+
+      </div>
+
+      <div id="Neuraxial-Anaesthesia">
+         <div id="Neuraxial-Anaesthesia-Title">
+            <h3> Neuraxial Anaesthesia </h3>
+         </div>
+
+         <div id="spinal-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span>Spinal</span>
+               </label>
+            </div>
+         </div>
+
+         <div id="epidural-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span>Epidural</span>
+               </label>
+            </div>
+         </div>
+
+         <div id="cse-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span>C.S.E</span>
+               </label>
+            </div>
+         </div>
+
+         <div id="spinal-catheter-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span>Spinal Catheter</span>
+               </label>
+            </div>
+         </div>
+
+         <div id="fill1"> </div>
+
+         <div id="Pre-Procedure-Title">
+            <h6> Pre-Procedure Checks </h6>
+         </div>
+
+         <div id="identity-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Identity </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="cannula-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> IV Cannula </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="monitors-eqpt-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Monitors and Eqpt Checked </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="surgical-consent-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Surgical Consent Confirmed </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="oxygen-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Oxygen Available </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="suction-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Suction Available </span>
+               </label>
+            </div>
+         </div>
+
+          <div id="emergency-drugs-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Emergency Drugs Available </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="site-marked-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Surgical Site Marked checked or N/A </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="anaesthetic-consent-Title">
+            <h6> Anaesthetic Consent </h6>
+         </div>
+
+         <div id="epidural-abcess-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Epidural Abscess </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="PDPH-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> PDPH 1:100-500 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="haematoma-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Haematoma </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="infection-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Infection </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="temp-nerve-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Temporary Nerve Damage 1:1000 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="perm-nerve-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Permanent Nerve Damage 1:23500-50500 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="paraplegia-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Paraplegia/Death 1/54500-141500 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="LAST-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> LA Systemic Toxicity </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="pain-failure-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Pain/Failure </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="conversion-GA-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Conversion to GA </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="motor-Block-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Motor Block </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="urinary-retention-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Urinary Retention/Catheter </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="hypotension-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Hypotension </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="nausea-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Nausea/Vomitting </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="itching-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Itching </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="rf-to-anaes-assess-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> See Anaesthetic Assessment </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="rf-consent-form-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> See Consent Form </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="spinal-block-Title">
+            <h6> Spinal Block </h6>
+         </div>
+
+         <div id="position-Title">
+            <span> Position </span>
+         </div>
+
+         <div id="left-lateral-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Left Lateral </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="right-lateral-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Right Lateral </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="sitting-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Sitting </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="prep-Title">
+            <span> Prep </span>
+         </div>
+
+         <div id="alcohol-swab-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Alcohol Swab </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="betadine-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Betadine </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="betasept-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Betasept </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="chlorhex-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 0.5% Chlorhex </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="allowed-to-dry-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Allowed to dry </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="gown-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Gown </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="hat-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Hat </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="drape-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Drape </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="gloves-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Gloves </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="hand-hygiene-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Hand Hygiene </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="mask-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Mask </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="monitoring-Title">
+            <span> Monitoring </span>
+         </div>
+
+         <div id="pulse-ox-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Continuous Pulse Oximetry </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="etco2-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> ETCO2 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="ecg-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> ECG </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="level-id-Title">
+            <span> Level Id </span>
+         </div>
+
+         <div id="landmark-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Landmark </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="ultrasound-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Ultrasound </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="level-comment-text">
+            <textarea type="text" id="level-comment" placeholder="Other Comments"></textarea>
+         </div>
+
+         <div id="approach-Title">
+            <span> Approach </span>
+         </div>
+
+         <div id="left-paramedian-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Left Paramedian </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="midline-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Midline </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="right-paramedian-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Right Paramedian </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="level-Title">
+            <span> Level </span>
+         </div>
+
+         <div id="l1-2-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> L1-2 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="l2-3-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> L2-3 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="l3-4-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> L3-4 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="l4-5-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> L4-5 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="l5-s1-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> L5-S1 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="needle-Title">
+            <span> Needle </span>
+         </div>
+
+         <div id="non-cutting-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> non-cutting </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="cutting-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> cutting </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="short-bevel-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> short-bevel </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="long-bevel-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> long-bevel </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="tuohy-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Tuohy </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="gauge-Title">
+            <span> Gauge </span>
+         </div>
+
+         <div id="twenty-two-g-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 22G </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="twenty-five-g-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 25G </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="twenty-nine-g-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 29G </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="needle-comment-text">
+            <textarea type="text" id="needle-comment" placeholder="Other Comments"></textarea>
+         </div>
+
+         <div id="length-Title">
+            <span> Length </span>
+         </div>
+
+         <div id="ninetymm-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 90mm </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="one-five-six-mm-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 156mm </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="length-comment-text">
+         <textarea type="text" id="length-comment" placeholder="Other Comments"></textarea>
+         </div>
+
+         <div id="attempts-Title">
+            <span> Position </span>
+         </div>
+
+         <div id="first-pass-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 1st Pass </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="second-pass-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 2nd Pass </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="over-2-passes-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> >2 Passes </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="agent-Title">
+            <span> Agent </span>
+         </div>
+
+         <div id="lidocaine-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 1% lidocaine to skin </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="bup-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> 0.5% hyperbaric bupivacaine </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="bup-volume">
+            <span> Volume (ml) </span>
+         </div>
+
+         <div id="bup-volume-field">
+            <input type="number" id="bup-volume-entry" placeholder="2.5" step="0.5">
+         </div>
+
+         <div id="bup-up-down">
+            <button> <span> + </span> </button>
+            <button> <span> - </span> </button>
+         </div>
+
+         <div id="diamorphine-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Diamorphine </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="diamorphine-dose">
+            <span> Dose (mcg) </span>
+         </div>
+
+         <div id="diamorphine-dose-field">
+            <input type="number" id="diamorph-dose-entry" placeholder="300" >
+         </div>
+
+         <div id="diamorph-up-down">
+            <button> <span> + </span> </button>
+            <button> <span> - </span> </button>
+         </div>
+
+         <div id="spacer-one"> <br> </div>
+
+         <div id="assessment-Title">
+            <h6> Assessment </h6>
+         </div>
+
+         <div id="block-cold-Title">
+            <span> Block to Cold </span>
+         </div>
+
+         <div id="coldt1-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T1 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt2-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T2 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt3-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T3 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt4-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T4 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt5-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T5 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt6-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T6 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt7-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T7 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt8-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T8 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt9-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T9 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="coldt10-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T10 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="block-touch-Title">
+            <span> Block to light touch </span>
+         </div>
+
+         <div id="toucht1-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T1 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht2-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T2 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht3-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T3 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht4-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T4 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht5-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T5 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht6-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T6 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht7-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T7 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht8-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T8 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht9-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T9 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="toucht10-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> T10 </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="block-height-comment-text">
+            <textarea type="text" id="block-height-comment" placeholder="Other Comments"></textarea>
+         </div>
+
+         <div id="complications-Title">
+            <h6> Complications </h6>
+         </div>
+
+         <div id="difficult-to-access-csf-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Difficult to Access CSF </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="bloody-tap-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Bloody Tap </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="transient-parasthesia-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Transient Parasthesia </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="pain-during-neuraxial-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Pain during Neuraxial </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="high-spinal-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> High Spinal </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="profound-hypotension-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Profound Hypotension </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="well-tolerated-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Procedure well tolerated under block </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="neuraxial-abandoned-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> Neuraxial Abandoned </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="pain-in-proc-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> pain during procedure </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="failure-checkbox">
+            <div class="cat checkSelect">
+               <label>
+                  <input type="checkbox" value="1"><span> failure -> GA </span>
+               </label>
+            </div>
+         </div>
+
+         <div id="complications-comment-text">
+            <textarea type="text" id="complications-comment" placeholder="Other Comments"></textarea>
+         </div>
+
+
+         <div id="additional-notes-Title">
+            <h6> Additional Notes </h6>
+         </div>
+
+         <div id="add-notes-text">
+            <textarea rows="3" cols="11" type="text" id="add-notes-comment" placeholder="Free Text"> </textarea>
+         </div>
+
+         <div id="submit-button">
+            <button onclick= "calculateResult()"> <span> Submit </span> </button>
+         </div>
+
+      </div>
+
+   </div>
+
+  </div>
+
+   <br><br>
+   <div id="page-output">
+    <h2>Confirm Submission</h2><br>
+      <h3>Neuraxial Anaesthesia </h3> <span i="neuraxial-type"></span><br>
+
+
+   <p>Pre-Procedure <br>
+      <span id="preprocedure-output"></span>
+
+   </div>
+
+</body>
+</html>
