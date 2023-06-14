@@ -2,7 +2,9 @@
 <html>
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-   <title>Welcome</title>
+   <script src="{{ url_for('static', filename='scoringForm.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <title> User Interface Study</title>
 </head>
 <h2>Study Description and Consent</h2>
 
@@ -20,36 +22,47 @@
 
                     You will be presented with 10 scenarios relating to provision of neuraxial anaesthesia for obstetric surgery.  These scenarios will be presented twice, with empty fields or with some prefilled information.  The order of presentation of these will be randomised for each participant.  A brief clinical scenario will be present at the top of the screen which includes all information expected to be entered.<br><br>
 
-                    There are 2 demonstration screens which follow this page to show the 2 types of presentation.  After these the data capture begins.  Once in the study please consider speed and accuracy to be your priority in terms of performance.
+                    There are 2 demonstration screens which follow this page to show the 2 types of presentation.  After these the data capture begins.  Once in the study please consider speed and accuracy to be your priority in terms of performance. <br>
              </span>
          </div>
 
           <div id="inclusion-heading">
-            <h3> <span> Confirmation of Inclusion </span> </h3>
+            <h3> <span> Confirmation of Consent and Eligibility </span> </h3>
          </div>
 
          <div id="confirmation-text">
-            <span> I have at least 2 years experience in obstetric neuraxial anaesthesia </span>
+            <span> <br> I consent to my involvement in this study and I have at least 2 years experience in obstetric neuraxial anaesthesia  </span> <br><br>
          </div>
 
           <div id="eligibility-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> no </span>
+                  <input type="checkbox" value="1" id="elig-check" onclick="funcChangeButton()"/> <span id="eligCheckText">no</span>
                </label>
             </div>
          </div>
 
-          <div id="fill2">
+          <div id="comment-div">
+            <span id = "comment"> </span>
+          </div>
+
+          <div id="agree-div">
+              <button class="positive-button" id="agree-button" onclick="eligValidation()"> <span>Agree and proceed</span> </button>
+          </div>
+
+         <div id="decline-button">
+              <button class="negative-button"> <span>Decline</span> </button>
+         </div>
+
+         <div id="fill2">
             <span> <br> </span>
           </div>
 
-          <div id="agree-button">
-            <button> <span> Agree and proceed </span> </button>
-         </div>
-
-         <div id="close-button">
-            <button> <span> Close </span> </button>
+         <div id="contact-text">
+            <h4>Contact Information</h4>
+            <span>Matt Julian - matthewdavid.julian@postgrad.manchester.ac.uk </span> <br>
+            <span>Alan Davies - alan.davies-2@manchester.ac.uk</span> <br>
+            <span>Phone - +44 (0)161 275 5147</span>
          </div>
 
       </div>

@@ -6,15 +6,15 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    <title>Neuraxial Entry</title>
 </head>
-<body>
+<body onload = "fillScenarioText()">
    <div class="container">
       <div id="Scenario-Container">
          <div id="Scenario-Text">
-            <h2>Scenario x/y</h2>
+            <h2>Scenario <span id="scenario-name"></span></h2>
             <h5>Indication for section, relevant clinical details and urgency:  </h5>
-            <span>Emergency LSCS for Pathological CTG and no improvement with conservative measures, BMI 43</span>
+            <span id="indications-text"></span>
             <h5>Other details</h5>
-            <span>Required more than 2 attempts, needle from 90mm to 156mm. 2nd pass with 156mm to clear CSF<br><br>Block T2 cold, T5 light touch, good effect</span>
+            <span id="other-text"></span>
          </div>
 
          <div id="Base-Assumption">
@@ -53,7 +53,7 @@
          <div id="spinal-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span>Spinal</span>
+                  <input type="radio" value="1" id="spinal-checkbox-input" name="neuraxial-type"> <span>Spinal</span>
                </label>
             </div>
          </div>
@@ -61,7 +61,7 @@
          <div id="epidural-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span>Epidural</span>
+                  <input type="radio" value="1" id="epidural-checkbox-input" name="neuraxial-type"><span>Epidural</span>
                </label>
             </div>
          </div>
@@ -69,7 +69,7 @@
          <div id="cse-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span>C.S.E</span>
+                  <input type="radio" value="1" id="cse-checkbox-input" name="neuraxial-type"><span>C.S.E</span>
                </label>
             </div>
          </div>
@@ -77,7 +77,7 @@
          <div id="spinal-catheter-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span>Spinal Catheter</span>
+                  <input type="radio" value="1" id="spinal-catheter-checkbox-input" name="neuraxial-type"><span>Spinal Catheter</span>
                </label>
             </div>
          </div>
@@ -1010,7 +1010,7 @@
    <br><br>
    <div id="page-output">
     <h2>Confirm Submission</h2><br>
-      <h3>Neuraxial Anaesthesia </h3> <span i="neuraxial-type"></span><br>
+      <h3>Neuraxial Anaesthesia <span id="neuraxial-type"></span></h3>
 
 
    <p>Pre-Procedure <br>
