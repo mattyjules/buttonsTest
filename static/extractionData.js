@@ -141,7 +141,6 @@ class ExtractionData {
          this.resetVariables()
          metrics.timerStart()
          this.resetClickCountPopupCount()
-         console.log("Scenario Set - all variables should be 0 and timer started, click count at this point = " + metrics.numberofClicks)
      }
 
         //ensures that the appropriate checkboxes are filled if prefilled
@@ -1446,10 +1445,7 @@ class ExtractionData {
     //Commit Button on popup pressed
     commitButtonPressed() {
         metrics.timerEnd();
-        console.log("array before updated - " + metrics.checkRadioArray)
         fieldStates.updateStateArrays()
-        console.log(metrics.numberofClicks)
-        console.log("array after updated - " + metrics.checkRadioArray)
 
         var server_data = [
              {"Scenario": formElementManager.scenarioArray[0]},
@@ -1483,7 +1479,6 @@ class ExtractionData {
         formElementManager.scenarioArray.shift()
 
         //reset page appearance to start for next scenario and clear fields
-        console.log("server updated, any clicks after this are as part of reset")
         popup.closePopup()
         this.setScenario()
         window.scrollTo(0,0);
