@@ -2,15 +2,29 @@
 <html>
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-   <script src="{{ url_for('static', filename='scoringForm.js') }}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="{{ url_for('static', filename='elementManager.js') }}"></script>
+   <script src="{{ url_for('static', filename='extractionData.js') }}"></script>
+   <script src="{{ url_for('static', filename='Popup.js') }}"></script>
+   <script src="{{ url_for('static', filename='metrics.js') }}"></script>
+   <script src="{{ url_for('static', filename='fieldStates.js') }}"></script>
+   <script src="{{ url_for('static', filename='landingJS.js') }}"></script>
+   <script src="{{ url_for('static', filename='main.js') }}"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+     $(document).ready(function () {
+         initMain();
+         extractionData.setScenario();
+         document.getElementById("scenarios-screen").addEventListener('mousedown',function(){metrics.processClicks()})
+        });
+  </script>
    <title>Neuraxial Entry</title>
 </head>
-<body onload = "fillScenarioText()">
+<body id="scenarios-screen">
    <div class="container">
       <div id="Scenario-Container">
          <div id="Scenario-Text">
-            <h2>Scenario <span id="scenario-name"></span></h2>
+            <span id="server-data-text"></span>
+            <h2>Scenario <strong id="scenario-name"></strong></h2>
             <h5>Indication for section, relevant clinical details and urgency:  </h5>
             <span id="indications-text"></span>
             <h5>Other details</h5>
@@ -53,7 +67,7 @@
          <div id="spinal-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="radio" value="1" id="spinal-checkbox-input" name="neuraxial-type"> <span>Spinal</span>
+                  <input class="neuraxial-radio" type="radio" value="1" id="spinal-checkbox-input" name="neuraxial-type"> <span>Spinal</span>
                </label>
             </div>
          </div>
@@ -61,7 +75,7 @@
          <div id="epidural-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="radio" value="1" id="epidural-checkbox-input" name="neuraxial-type"><span>Epidural</span>
+                  <input class="neuraxial-radio" type="radio" value="1" id="epidural-checkbox-input" name="neuraxial-type"><span>Epidural</span>
                </label>
             </div>
          </div>
@@ -69,7 +83,7 @@
          <div id="cse-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="radio" value="1" id="cse-checkbox-input" name="neuraxial-type"><span>C.S.E</span>
+                  <input class="neuraxial-radio" type="radio" value="1" id="cse-checkbox-input" name="neuraxial-type"><span>C.S.E</span>
                </label>
             </div>
          </div>
@@ -77,7 +91,7 @@
          <div id="spinal-catheter-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="radio" value="1" id="spinal-catheter-checkbox-input" name="neuraxial-type"><span>Spinal Catheter</span>
+                  <input class="neuraxial-radio" type="radio" value="1" id="spinal-catheter-checkbox-input" name="neuraxial-type"><span>Spinal Catheter</span>
                </label>
             </div>
          </div>
@@ -91,7 +105,7 @@
          <div id="identity-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Identity </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="identity-check"><span> Identity </span>
                </label>
             </div>
          </div>
@@ -99,7 +113,7 @@
          <div id="cannula-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> IV Cannula </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="cannula-check"><span> IV Cannula </span>
                </label>
             </div>
          </div>
@@ -107,7 +121,7 @@
          <div id="monitors-eqpt-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Monitors and Eqpt Checked </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="monitors-eqpt-check"><span> Monitors and Eqpt Checked </span>
                </label>
             </div>
          </div>
@@ -115,7 +129,7 @@
          <div id="surgical-consent-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Surgical Consent Confirmed </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="surgical-consent-check"><span> Surgical Consent Confirmed </span>
                </label>
             </div>
          </div>
@@ -123,7 +137,7 @@
          <div id="oxygen-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Oxygen Available </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="oxygen-check"><span> Oxygen Available </span>
                </label>
             </div>
          </div>
@@ -131,7 +145,7 @@
          <div id="suction-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Suction Available </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="suction-check"><span> Suction Available </span>
                </label>
             </div>
          </div>
@@ -139,7 +153,7 @@
           <div id="emergency-drugs-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Emergency Drugs Available </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="emergency-drugs-check"><span> Emergency Drugs Available </span>
                </label>
             </div>
          </div>
@@ -147,7 +161,7 @@
          <div id="site-marked-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Surgical Site Marked checked or N/A </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="site-marked-check"><span> Surgical Site Marked checked or N/A </span>
                </label>
             </div>
          </div>
@@ -159,7 +173,7 @@
          <div id="epidural-abcess-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Epidural Abscess </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="epidural-abscess-check"><span> Epidural Abscess </span>
                </label>
             </div>
          </div>
@@ -167,7 +181,7 @@
          <div id="PDPH-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> PDPH 1:100-500 </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="PDPH-check"><span> PDPH 1:100-500 </span>
                </label>
             </div>
          </div>
@@ -175,7 +189,7 @@
          <div id="haematoma-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Haematoma </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="haematoma-check"><span> Haematoma </span>
                </label>
             </div>
          </div>
@@ -183,7 +197,7 @@
          <div id="infection-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Infection </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="infection-check"><span> Infection </span>
                </label>
             </div>
          </div>
@@ -191,7 +205,7 @@
          <div id="temp-nerve-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Temporary Nerve Damage 1:1000 </span>
+                  <input class="always-expected pre-procedure scenario-check" type="checkbox" value="1" id="temp-nerve-check"><span> Temporary Nerve Damage 1:1000 </span>
                </label>
             </div>
          </div>
@@ -199,7 +213,7 @@
          <div id="perm-nerve-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Permanent Nerve Damage 1:23500-50500 </span>
+                  <input class="always-expected consent scenario-check" type="checkbox" value="1" id="perm-nerve-check"><span> Permanent Nerve Damage 1:23500-50500 </span>
                </label>
             </div>
          </div>
@@ -207,7 +221,7 @@
          <div id="paraplegia-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Paraplegia/Death 1/54500-141500 </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="paraplegia-check"><span> Paraplegia/Death 1/54500-141500 </span>
                </label>
             </div>
          </div>
@@ -215,7 +229,7 @@
          <div id="LAST-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> LA Systemic Toxicity </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="LAST-check"><span> LA Systemic Toxicity </span>
                </label>
             </div>
          </div>
@@ -223,7 +237,7 @@
          <div id="pain-failure-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Pain/Failure </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="pain-failure-check"><span> Pain/Failure </span>
                </label>
             </div>
          </div>
@@ -231,7 +245,7 @@
          <div id="conversion-GA-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Conversion to GA </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="conversion-GA-check"><span> Conversion to GA </span>
                </label>
             </div>
          </div>
@@ -239,7 +253,7 @@
          <div id="motor-Block-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Motor Block </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="motor-Block-check"><span> Motor Block </span>
                </label>
             </div>
          </div>
@@ -247,7 +261,7 @@
          <div id="urinary-retention-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Urinary Retention/Catheter </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="urinary-retention-check"><span> Urinary Retention/Catheter </span>
                </label>
             </div>
          </div>
@@ -255,7 +269,7 @@
          <div id="hypotension-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Hypotension </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="hypotension-check"><span> Hypotension </span>
                </label>
             </div>
          </div>
@@ -263,7 +277,7 @@
          <div id="nausea-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Nausea/Vomitting </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="nausea-check"><span> Nausea/Vomitting </span>
                </label>
             </div>
          </div>
@@ -271,7 +285,7 @@
          <div id="itching-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Itching </span>
+                  <input class="always-expected  scenario-check" type="checkbox" value="1" id="itching-check"><span> Itching </span>
                </label>
             </div>
          </div>
@@ -279,7 +293,7 @@
          <div id="rf-to-anaes-assess-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> See Anaesthetic Assessment </span>
+                  <input class="not-expected  scenario-check" type="checkbox" value="1" id="rf-to-anaes-assess-check"><span> See Anaesthetic Assessment </span>
                </label>
             </div>
          </div>
@@ -287,7 +301,7 @@
          <div id="rf-consent-form-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> See Consent Form </span>
+                  <input class="not-expected  scenario-check" type="checkbox" value="1" id="rf-consent-form-check"><span> See Consent Form </span>
                </label>
             </div>
          </div>
@@ -303,7 +317,7 @@
          <div id="left-lateral-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Left Lateral </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="left-lateral-check"><span> Left Lateral </span>
                </label>
             </div>
          </div>
@@ -311,7 +325,7 @@
          <div id="right-lateral-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Right Lateral </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="right-lateral-check"><span> Right Lateral </span>
                </label>
             </div>
          </div>
@@ -319,7 +333,7 @@
          <div id="sitting-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Sitting </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="sitting-check"><span> Sitting </span>
                </label>
             </div>
          </div>
@@ -331,7 +345,7 @@
          <div id="alcohol-swab-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Alcohol Swab </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="alcohol-swab-check"><span> Alcohol Swab </span>
                </label>
             </div>
          </div>
@@ -339,7 +353,7 @@
          <div id="betadine-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Betadine </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="betadine-check"><span> Betadine </span>
                </label>
             </div>
          </div>
@@ -347,7 +361,7 @@
          <div id="betasept-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Betasept </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="betasept-check"><span> Betasept </span>
                </label>
             </div>
          </div>
@@ -355,7 +369,7 @@
          <div id="chlorhex-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 0.5% Chlorhex </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="chlorhex-check"><span> 0.5% Chlorhex </span>
                </label>
             </div>
          </div>
@@ -363,7 +377,7 @@
          <div id="allowed-to-dry-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Allowed to dry </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="allowed-to-dry-check"><span> Allowed to dry </span>
                </label>
             </div>
          </div>
@@ -371,7 +385,7 @@
          <div id="gown-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Gown </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="gown-check"><span> Gown </span>
                </label>
             </div>
          </div>
@@ -379,7 +393,7 @@
          <div id="hat-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Hat </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="hat-check"><span> Hat </span>
                </label>
             </div>
          </div>
@@ -387,7 +401,7 @@
          <div id="drape-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Drape </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="drape-check"><span> Drape </span>
                </label>
             </div>
          </div>
@@ -395,7 +409,7 @@
          <div id="gloves-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Gloves </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="gloves-check"><span> Gloves </span>
                </label>
             </div>
          </div>
@@ -403,7 +417,7 @@
          <div id="hand-hygiene-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Hand Hygiene </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="hand-hygiene-check"><span> Hand Hygiene </span>
                </label>
             </div>
          </div>
@@ -411,7 +425,7 @@
          <div id="mask-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Mask </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="mask-check"><span> Mask </span>
                </label>
             </div>
          </div>
@@ -423,7 +437,7 @@
          <div id="pulse-ox-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Continuous Pulse Oximetry </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="pulse-ox-check"><span> Continuous Pulse Oximetry </span>
                </label>
             </div>
          </div>
@@ -431,7 +445,7 @@
          <div id="etco2-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> ETCO2 </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="etco2-check"><span> ETCO2 </span>
                </label>
             </div>
          </div>
@@ -439,7 +453,7 @@
          <div id="ecg-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> ECG </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="ecg-check"><span> ECG </span>
                </label>
             </div>
          </div>
@@ -451,7 +465,7 @@
          <div id="landmark-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Landmark </span>
+                  <input class="level-id scenario-check" type="checkbox" value="1" id="landmark-check"><span> Landmark </span>
                </label>
             </div>
          </div>
@@ -459,13 +473,13 @@
          <div id="ultrasound-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Ultrasound </span>
+                  <input class="level-id scenario-check" type="checkbox" value="1" id="ultrasound-check"><span> Ultrasound </span>
                </label>
             </div>
          </div>
 
          <div id="level-comment-text">
-            <textarea type="text" id="level-comment" placeholder="Other Comments"></textarea>
+            <textarea class="comment-text" type="text" id="level-comment" placeholder="Comments"></textarea>
          </div>
 
          <div id="approach-Title">
@@ -475,7 +489,7 @@
          <div id="left-paramedian-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Left Paramedian </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="left-paramedian-check"><span> Left Paramedian </span>
                </label>
             </div>
          </div>
@@ -483,7 +497,7 @@
          <div id="midline-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Midline </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="midline-check"><span> Midline </span>
                </label>
             </div>
          </div>
@@ -491,7 +505,7 @@
          <div id="right-paramedian-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Right Paramedian </span>
+                  <input class="not-expected  scenario-check" type="checkbox" value="1" id="right-paramedian-check"><span> Right Paramedian </span>
                </label>
             </div>
          </div>
@@ -503,7 +517,7 @@
          <div id="l1-2-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> L1-2 </span>
+                  <input class="not-expected needle-level scenario-check" type="checkbox" value="1" id="l1-2-check"><span> L1-2 </span>
                </label>
             </div>
          </div>
@@ -511,7 +525,7 @@
          <div id="l2-3-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> L2-3 </span>
+                  <input class="needle-level-acceptable scenario-check" type="checkbox" value="1" id="l2-3-check"><span> L2-3 </span>
                </label>
             </div>
          </div>
@@ -519,7 +533,7 @@
          <div id="l3-4-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> L3-4 </span>
+                  <input class="needle-level-acceptable scenario-check" type="checkbox" value="1" id="l3-4-check"><span> L3-4 </span>
                </label>
             </div>
          </div>
@@ -527,7 +541,7 @@
          <div id="l4-5-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> L4-5 </span>
+                  <input class="needle-level-acceptable scenario-check" type="checkbox" value="1" id="l4-5-check"><span> L4-5 </span>
                </label>
             </div>
          </div>
@@ -535,7 +549,7 @@
          <div id="l5-s1-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> L5-S1 </span>
+                  <input class="needle-level-acceptable scenario-check" type="checkbox" value="1" id="l5-s1-check"><span> L5-S1 </span>
                </label>
             </div>
          </div>
@@ -547,7 +561,7 @@
          <div id="non-cutting-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> non-cutting </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="non-cutting-check"><span> non-cutting </span>
                </label>
             </div>
          </div>
@@ -555,7 +569,7 @@
          <div id="cutting-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> cutting </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="cutting-check"><span> cutting </span>
                </label>
             </div>
          </div>
@@ -563,7 +577,7 @@
          <div id="short-bevel-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> short-bevel </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="short-bevel-check"><span> short-bevel </span>
                </label>
             </div>
          </div>
@@ -571,7 +585,7 @@
          <div id="long-bevel-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> long-bevel </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="long-bevel-check"><span> long-bevel </span>
                </label>
             </div>
          </div>
@@ -579,7 +593,7 @@
          <div id="tuohy-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Tuohy </span>
+                  <input class="tuohy scenario-check" type="checkbox" value="1" id="tuohy-check"><span> Tuohy </span>
                </label>
             </div>
          </div>
@@ -591,7 +605,7 @@
          <div id="twenty-two-g-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 22G </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="twenty-two-g-check"><span> 22G </span>
                </label>
             </div>
          </div>
@@ -599,7 +613,7 @@
          <div id="twenty-five-g-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 25G </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="twenty-five-g-check"><span> 25G </span>
                </label>
             </div>
          </div>
@@ -607,13 +621,13 @@
          <div id="twenty-nine-g-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 29G </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="twenty-nine-g-check"><span> 29G </span>
                </label>
             </div>
          </div>
 
          <div id="needle-comment-text">
-            <textarea type="text" id="needle-comment" placeholder="Other Comments"></textarea>
+            <textarea class="comment-text" type="text" id="needle-comment" placeholder="Gauge" id="needle-comment"></textarea>
          </div>
 
          <div id="length-Title">
@@ -623,7 +637,7 @@
          <div id="ninetymm-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 90mm </span>
+                  <input class="length-needle scenario-check" type="checkbox" value="1" id="ninetymm-check"><span> 90mm </span>
                </label>
             </div>
          </div>
@@ -631,23 +645,23 @@
          <div id="one-five-six-mm-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 156mm </span>
+                  <input class="length-needle scenario-check" type="checkbox" value="1" id="one-five-six-mm-check"><span> 156mm </span>
                </label>
             </div>
          </div>
 
          <div id="length-comment-text">
-         <textarea type="text" id="length-comment" placeholder="Other Comments"></textarea>
+         <textarea class="comment-text" type="text" id="length-comment" placeholder="Additional comment regarding needle" id="length-comment"></textarea>
          </div>
 
          <div id="attempts-Title">
-            <span> Position </span>
+            <span> Attempts </span>
          </div>
 
          <div id="first-pass-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 1st Pass </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="first-pass-check"><span> 1st Pass </span>
                </label>
             </div>
          </div>
@@ -655,7 +669,7 @@
          <div id="second-pass-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 2nd Pass </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="second-pass-check"><span> 2nd Pass </span>
                </label>
             </div>
          </div>
@@ -663,7 +677,7 @@
          <div id="over-2-passes-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> >2 Passes </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="over-2-passes-check"><span> >2 Passes </span>
                </label>
             </div>
          </div>
@@ -675,7 +689,7 @@
          <div id="lidocaine-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 1% lidocaine to skin </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="lidocaine-check"><span> 1% lidocaine to skin </span>
                </label>
             </div>
          </div>
@@ -683,7 +697,7 @@
          <div id="bup-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> 0.5% hyperbaric bupivacaine </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="bup-check"><span> 0.5% hyperbaric bupivacaine </span>
                </label>
             </div>
          </div>
@@ -693,18 +707,18 @@
          </div>
 
          <div id="bup-volume-field">
-            <input type="number" id="bup-volume-entry" placeholder="2.5" step="0.5">
+            <input  class="drug-number" type="number" id="bup-volume-entry" value="0" min="0" max="5" step="0.1"/>
          </div>
 
          <div id="bup-up-down">
-            <button> <span> + </span> </button>
-            <button> <span> - </span> </button>
+            <button id="bup-up-button" onclick="extractionData.bupUp()"> <span> + </span> </button>
+            <button id="bup-down-button" onclick="extractionData.bupDown()"> <span> - </span> </button>
          </div>
 
          <div id="diamorphine-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Diamorphine </span>
+                  <input class="agent scenario-check" type="checkbox" value="1" id="diamorphine-check"><span> Diamorphine </span>
                </label>
             </div>
          </div>
@@ -714,12 +728,12 @@
          </div>
 
          <div id="diamorphine-dose-field">
-            <input type="number" id="diamorph-dose-entry" placeholder="300" >
+            <input  class="drug-number"  type="number" id="diamorph-dose-entry" value="0" step="50" min="0" max="500"/>
          </div>
 
          <div id="diamorph-up-down">
-            <button> <span> + </span> </button>
-            <button> <span> - </span> </button>
+            <button id="diamorph-up-button" onclick="extractionData.diamorphUp()"> <span>+</span></button>
+            <button id="diamorph-down-button" onclick="extractionData.diamorphDown()"> <span>-</span></button>
          </div>
 
          <div id="spacer-one"> <br> </div>
@@ -735,7 +749,7 @@
          <div id="coldt1-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T1 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt1-check"><span> T1 </span>
                </label>
             </div>
          </div>
@@ -743,7 +757,7 @@
          <div id="coldt2-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T2 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt2-check"><span> T2 </span>
                </label>
             </div>
          </div>
@@ -751,7 +765,7 @@
          <div id="coldt3-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T3 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt3-check"><span> T3 </span>
                </label>
             </div>
          </div>
@@ -759,7 +773,7 @@
          <div id="coldt4-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T4 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt4-check"><span> T4 </span>
                </label>
             </div>
          </div>
@@ -767,7 +781,7 @@
          <div id="coldt5-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T5 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt5-check"><span> T5 </span>
                </label>
             </div>
          </div>
@@ -775,7 +789,7 @@
          <div id="coldt6-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T6 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt6-check"><span> T6 </span>
                </label>
             </div>
          </div>
@@ -783,7 +797,7 @@
          <div id="coldt7-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T7 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt7-check"><span> T7 </span>
                </label>
             </div>
          </div>
@@ -791,7 +805,7 @@
          <div id="coldt8-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T8 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt8-check"><span> T8 </span>
                </label>
             </div>
          </div>
@@ -799,7 +813,7 @@
          <div id="coldt9-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T9 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt9-check"><span> T9 </span>
                </label>
             </div>
          </div>
@@ -807,7 +821,7 @@
          <div id="coldt10-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T10 </span>
+                  <input class="cold-block-level scenario-check" type="checkbox" value="1" id="coldt10-check"><span> T10 </span>
                </label>
             </div>
          </div>
@@ -819,7 +833,7 @@
          <div id="toucht1-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T1 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht1-check"><span> T1 </span>
                </label>
             </div>
          </div>
@@ -827,7 +841,7 @@
          <div id="toucht2-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T2 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht2-check"><span> T2 </span>
                </label>
             </div>
          </div>
@@ -835,7 +849,7 @@
          <div id="toucht3-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T3 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht3-check"><span> T3 </span>
                </label>
             </div>
          </div>
@@ -843,7 +857,7 @@
          <div id="toucht4-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T4 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht4-check"><span> T4 </span>
                </label>
             </div>
          </div>
@@ -851,7 +865,7 @@
          <div id="toucht5-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T5 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht5-check"><span> T5 </span>
                </label>
             </div>
          </div>
@@ -859,7 +873,7 @@
          <div id="toucht6-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T6 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht6-check"><span> T6 </span>
                </label>
             </div>
          </div>
@@ -867,7 +881,7 @@
          <div id="toucht7-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T7 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht7-check"><span> T7 </span>
                </label>
             </div>
          </div>
@@ -875,7 +889,7 @@
          <div id="toucht8-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T8 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht8-check"><span> T8 </span>
                </label>
             </div>
          </div>
@@ -883,7 +897,7 @@
          <div id="toucht9-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T9 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht9-check"><span> T9 </span>
                </label>
             </div>
          </div>
@@ -891,13 +905,13 @@
          <div id="toucht10-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> T10 </span>
+                  <input class="touch-block-level scenario-check" type="checkbox" value="1" id="toucht10-check"><span> T10 </span>
                </label>
             </div>
          </div>
 
          <div id="block-height-comment-text">
-            <textarea type="text" id="block-height-comment" placeholder="Other Comments"></textarea>
+            <textarea class="comment-text" type="text" id="block-height-comment" placeholder="Comments"></textarea>
          </div>
 
          <div id="complications-Title">
@@ -907,7 +921,7 @@
          <div id="difficult-to-access-csf-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Difficult to Access CSF </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="difficult-to-access-csf-check"><span> Difficult to Access CSF </span>
                </label>
             </div>
          </div>
@@ -915,7 +929,7 @@
          <div id="bloody-tap-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Bloody Tap </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="bloody-tap-check"><span> Bloody Tap </span>
                </label>
             </div>
          </div>
@@ -923,7 +937,7 @@
          <div id="transient-parasthesia-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Transient Parasthesia </span>
+                  <input class="scenario-check" type="checkbox" value="1" id="transient-parasthesia-check"><span> Transient Parasthesia </span>
                </label>
             </div>
          </div>
@@ -931,7 +945,7 @@
          <div id="pain-during-neuraxial-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Pain during Neuraxial </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="pain-during-neuraxial-check"><span> Pain during Neuraxial </span>
                </label>
             </div>
          </div>
@@ -939,7 +953,7 @@
          <div id="high-spinal-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> High Spinal </span>
+                  <input class="not-expected complication scenario-check" type="checkbox" value="1" id="high-spinal-check"><span> High Spinal </span>
                </label>
             </div>
          </div>
@@ -947,7 +961,7 @@
          <div id="profound-hypotension-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Profound Hypotension </span>
+                  <input class="not-expected complication scenario-check" type="checkbox" value="1" id="profound-hypotension-check"><span> Profound Hypotension </span>
                </label>
             </div>
          </div>
@@ -955,7 +969,7 @@
          <div id="well-tolerated-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Procedure well tolerated under block </span>
+                  <input class="always-expected scenario-check" type="checkbox" value="1" id="well-tolerated-check"><span> Procedure well tolerated under block </span>
                </label>
             </div>
          </div>
@@ -963,7 +977,7 @@
          <div id="neuraxial-abandoned-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> Neuraxial Abandoned </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="neuraxial-abandoned-check"><span> Neuraxial Abandoned </span>
                </label>
             </div>
          </div>
@@ -971,7 +985,7 @@
          <div id="pain-in-proc-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> pain during procedure </span>
+                  <input class="not-expected scenario-check" type="checkbox" value="1" id="pain-in-proc-check"><span> pain during procedure </span>
                </label>
             </div>
          </div>
@@ -979,13 +993,13 @@
          <div id="failure-checkbox">
             <div class="cat checkSelect">
                <label>
-                  <input type="checkbox" value="1"><span> failure -> GA </span>
+                  <input class="complication scenario-check" type="checkbox" value="1" id="failure-check"><span> failure -> GA </span>
                </label>
             </div>
          </div>
 
          <div id="complications-comment-text">
-            <textarea type="text" id="complications-comment" placeholder="Other Comments"></textarea>
+            <textarea class="comment-text" type="text" id="complications-comment" placeholder="Complication Comments"></textarea>
          </div>
 
 
@@ -998,25 +1012,82 @@
          </div>
 
          <div id="submit-button">
-            <button onclick= "calculateResult()"> <span> Submit </span> </button>
+            <button class="positive-button" onclick= "extractionData.submitButtonPressed()"> <span> Submit </span> </button>
          </div>
 
       </div>
 
    </div>
 
-  </div>
-
-   <br><br>
-   <div id="page-output">
-    <h2>Confirm Submission</h2><br>
-      <h3>Neuraxial Anaesthesia <span id="neuraxial-type"></span></h3>
 
 
-   <p>Pre-Procedure <br>
-      <span id="preprocedure-output"></span>
+<div id="mask"></div>
 
+<div id="entered-popup">
+     <div id="page-output">
+         <div id="Popup-Container">
+            <div id="Content-Popup">
+
+                  <h2>Confirm Submission</h2><br>
+                  <h3>Neuraxial Anaesthesia - <span id="neuraxial-type"></span></h3>
+
+
+                  <h4>Pre-Procedure</h4>
+                     <p><span id="preprocedure-output"></span></p>
+
+                  <h4>Anaesthetic Risk:</h4>
+                  <p><span id="anaesthetic-risk-output"></span></p>
+
+                  <h4>Block Details</h4>
+                  <h4>Position:</h4>
+                  <p><span id="position-output"></span><br>
+
+                  <h4>Prep:</h4>
+                  <p><span id="prep-output"></span></p><br>
+
+                  <h4>Monitoring:</h4>
+                  <p><span id="monitoring-output"></span></p><br>
+
+                  <h4>Level Id:</h4>
+                  <p><span id="level-id-output"></span></p>
+
+                  <h4>Approach: </h4>
+                  <p><span id="approach-output"></span></p>
+
+                  <h4>Level:</h4>
+                  <p><span id="level-output"></span></p>
+
+                  <h4>Needle:</h4>
+                  <p><span id="needle-output"></span></p>
+
+                  <h4>Attempt:</h4>
+                  <p><span id="attempt-output"></span></p><br>
+
+                  <h4>Agents:</h4>
+                  <p><span id="agent-output"></span></p><br>
+
+                  <h4>Assessment:</h4>
+                  <p><span id="assessment-output"></span></p>
+
+                  <h4>Complications: </h4>
+                  <p><span id="complications-output"></span></p> <br>
+
+                  <h4>Additional Comments</h4>
+                  <p><span id="additional-comments-output"></span></p>
+
+                  <div id="popup-button-div">
+                        <button class="negative-button" id="amend-button" onclick= "extractionData.amendButtonPressed()"> <span> Amend </span> </button>
+                        <button class="positive-button" id="commit-button" onclick= "extractionData.commitButtonPressed()"> <span> Commit </span> </button>
+                  </div>
+            </div>
+         </div>
    </div>
+
+
+
+
+</div>
+
 
 </body>
 </html>

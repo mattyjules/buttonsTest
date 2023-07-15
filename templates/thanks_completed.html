@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <script src="{{ url_for('static', filename='elementManager.js') }}"></script>
+   <script src="{{ url_for('static', filename='extractionData.js') }}"></script>
+   <script src="{{ url_for('static', filename='Popup.js') }}"></script>
+   <script src="{{ url_for('static', filename='metrics.js') }}"></script>
+   <script src="{{ url_for('static', filename='fieldStates.js') }}"></script>
+   <script src="{{ url_for('static', filename='landingJS.js') }}"></script>
+   <script src="{{ url_for('static', filename='main.js') }}"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script type="text/javascript">
+     $(document).ready(function () {
+         initMain();
+
+     });
+  </script>
+   <title>Thank You</title>
+</head>
+
+<body>
+    <div class="container">
+      <div id="completed-thanks-Container">
+         <div id="less-thanks-Text">
+             <h2>Thank You</h2>
+
+
+
+                 <strong>With your contribution added to the dataset: </strong><br><br>
+
+                 <span>{{resultMessage}}</span> <br><br>
+
+
+
+                <div id="Feedback-notes-Title">
+
+
+                <h6> Any observations/comment </h6>
+                </div>
+
+                <div>
+                <textarea type="text" rows="8" cols="112" id="feedback-notes-comment" placeholder="Free Text"> </textarea>
+                </div>
+
+                <div id="feedback-button">
+                <button class="positive-button" onclick="extractionData.feedbackButtonPressed()"> <span> Submit </span> </button>
+                </div>
+
+                <br>
+
+                <span>Your participation in this study is very much appreciated.  We hope that your contribution will enable more informed design decisions for information systems<br><br></span>
+                <span id="recruitment-team">We require <strong>{{numReq}}</strong> further participants to complete the study (based on power calculation), please encourage others!<br><br></span>
+
+                <span>Many thanks</span><br>
+                <span>Matt Julian and Alan Davies (study team)</span><br><br>
+
+            <h3>Contact Information</h3>
+            <span>Matt Julian - matthewdavid.julian@postgrad.manchester.ac.uk </span> <br>
+            <span>Alan Davies - alan.davies-2@manchester.ac.uk</span> <br>
+            <span>Phone - +44 (0)161 275 5147</span>
+         </div>
+
+
+      </div>
+    </div>
+
+            <!-- The actual snackbar -->
+            <div id="snackbar">Feedback received</div>
+
+</body>
+
+</html>
